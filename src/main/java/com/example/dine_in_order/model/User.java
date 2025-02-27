@@ -32,6 +32,7 @@ public class User {
     private String phno;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     @Column(name = "created_at")
