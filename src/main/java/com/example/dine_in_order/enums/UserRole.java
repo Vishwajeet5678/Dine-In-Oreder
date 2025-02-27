@@ -1,4 +1,5 @@
-package com.example.Dine_In_Order.enums;
+package com.example.dine_in_order.enums;
 
 public enum UserRole {
+    ADMIN,STAFF
 }

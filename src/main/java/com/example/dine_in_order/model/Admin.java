@@ -1,4 +1,9 @@
-package com.example.Dine_In_Order.model;
+package com.example.dine_in_order.model;
 
-public class Admin {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "admins")
+public class Admin extends User{
 }
