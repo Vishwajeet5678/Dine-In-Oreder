@@ -7,9 +7,7 @@ import com.example.dine_in_order.util.ResponseStructure;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static java.util.stream.DoubleStream.builder;
 
@@ -24,5 +22,12 @@ public class UserController {
         user=userService.registerUser(user);
         return ResponseBuilder.sucess(HttpStatus.CREATED,"User Created",user);
     }
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseStructure<User>> findUserById(@PathVariable("userId") long userId)
+    {
+        User user=userService.findUserById(userId);
+        return ResponseBuilder.sucess(HttpStatus.OK,"User Found",user);
+    }
+
 
 }

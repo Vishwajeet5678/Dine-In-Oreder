@@ -1,6 +1,7 @@
 package com.example.dine_in_order.service.serviceimpl;
 
 import com.example.dine_in_order.enums.UserRole;
+import com.example.dine_in_order.exception.UserNotFoundByIdException;
 import com.example.dine_in_order.model.Admin;
 import com.example.dine_in_order.model.Staff;
 import com.example.dine_in_order.model.User;
@@ -9,6 +10,8 @@ import com.example.dine_in_order.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +24,15 @@ public class UserServiceImpl implements UserService {
        this.mapToNewUser(user,child);
         return userRepository.save(child);
     }
+
+    @Override
+    public User findUserById(long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(
+                        ()->new UserNotFoundByIdException("User not found by id")
+                );
+    }
+
 
     private  User createUserByRole(UserRole role) {
         User user;
