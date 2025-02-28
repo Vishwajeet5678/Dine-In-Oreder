@@ -1,7 +1,11 @@
 package com.example.dine_in_order.service.serviceimpl;
 
+import com.example.dine_in_order.dto.request.RegistrationRequest;
+import com.example.dine_in_order.dto.request.UserRequest;
+import com.example.dine_in_order.dto.response.UserResponse;
 import com.example.dine_in_order.enums.UserRole;
 import com.example.dine_in_order.exception.UserNotFoundByIdException;
+import com.example.dine_in_order.mapper.UserMapper;
 import com.example.dine_in_order.model.Admin;
 import com.example.dine_in_order.model.Staff;
 import com.example.dine_in_order.model.User;
@@ -9,29 +13,22 @@ import com.example.dine_in_order.repository.UserRepository;
 import com.example.dine_in_order.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper mapper;
     @Override
-    public User registerUser(User user) {
-       User child=this.createUserByRole(user.getRole());
-       this.mapToNewUser(user,child);
-        return userRepository.save(child);
+    public UserResponse registerUser(RegistrationRequest registration) {
+       User user=this.createUserByRole(registration.getRole());
+       mapper.mapToUser(registration,user);
+        userRepository.save(user);
+
+       return mapper.mapToUserResponse(user);
     }
 
-    @Override
-    public User findUserById(long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(
-                        ()->new UserNotFoundByIdException("User not found by id")
-                );
-    }
 
 
     private  User createUserByRole(UserRole role) {
@@ -44,13 +41,29 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
-    private void mapToNewUser(User user,User user2){
-        user2.setUserName(user.getUserName());
-        user2.setEmail(user.getEmail());
-        user2.setPassword(user.getPassword());
-        user2.setPhno(user.getPhno());
-        user2.setRole(user.getRole());
+
+
+
+    @Override
+    public UserResponse findUserById(long userId) {
+                User user=userRepository.findById(userId)
+                .orElseThrow(
+                        ()->new UserNotFoundByIdException("User not found by id")
+                );
+               return mapper.mapToUserResponse(user);
 
     }
+
+    @Override
+    public UserResponse updateUserById(long userId, UserRequest user) {
+        User exUser=userRepository.findById(userId)
+                .orElseThrow(()->new UserNotFoundByIdException("User Not found"));
+        mapper.mapToNewUserRequest(user,exUser);
+         userRepository.save(exUser);
+         return mapper.mapToUserResponse(exUser);
+
+
+    }
+
 
 }

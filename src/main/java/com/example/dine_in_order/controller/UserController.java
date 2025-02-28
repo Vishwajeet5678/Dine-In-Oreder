@@ -1,5 +1,8 @@
 package com.example.dine_in_order.controller;
 
+import com.example.dine_in_order.dto.request.RegistrationRequest;
+import com.example.dine_in_order.dto.request.UserRequest;
+import com.example.dine_in_order.dto.response.UserResponse;
 import com.example.dine_in_order.model.User;
 import com.example.dine_in_order.service.UserService;
 import com.example.dine_in_order.util.ResponseBuilder;
@@ -17,16 +20,22 @@ public class UserController {
 
     private  final UserService userService;
     @PostMapping("/register")
-    public ResponseEntity<ResponseStructure<User>> registerUser(@RequestBody User user)
+    public ResponseEntity<ResponseStructure<UserResponse>> registerUser(@RequestBody RegistrationRequest user)
     {
-        user=userService.registerUser(user);
-        return ResponseBuilder.sucess(HttpStatus.CREATED,"User Created",user);
+        UserResponse response=userService.registerUser(user);
+        return ResponseBuilder.sucess(HttpStatus.CREATED,"User Created",response);
     }
     @GetMapping("/{userId}")
-    public ResponseEntity<ResponseStructure<User>> findUserById(@PathVariable("userId") long userId)
+    public ResponseEntity<ResponseStructure<UserResponse>> findUserById(@PathVariable("userId") long userId)
     {
-        User user=userService.findUserById(userId);
+        UserResponse user=userService.findUserById(userId);
         return ResponseBuilder.sucess(HttpStatus.OK,"User Found",user);
+    }
+    @PutMapping("/{userId}")
+    public ResponseEntity<ResponseStructure<UserResponse>> updateUserById(@PathVariable("userId")long userId,@RequestBody UserRequest user)
+    {
+         UserResponse response=userService.updateUserById(userId,user);
+        return ResponseBuilder.sucess(HttpStatus.OK,"User Updated",response);
     }
 
 
