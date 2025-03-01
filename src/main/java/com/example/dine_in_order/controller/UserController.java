@@ -7,6 +7,7 @@ import com.example.dine_in_order.model.User;
 import com.example.dine_in_order.service.UserService;
 import com.example.dine_in_order.util.ResponseBuilder;
 import com.example.dine_in_order.util.ResponseStructure;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class UserController {
 
     private  final UserService userService;
     @PostMapping("/register")
-    public ResponseEntity<ResponseStructure<UserResponse>> registerUser(@RequestBody RegistrationRequest user)
+    public ResponseEntity<ResponseStructure<UserResponse>> registerUser(@RequestBody @Valid RegistrationRequest user)
     {
         UserResponse response=userService.registerUser(user);
         return ResponseBuilder.sucess(HttpStatus.CREATED,"User Created",response);
