@@ -24,7 +24,7 @@ import static java.util.stream.DoubleStream.builder;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("${app.base-url}")
 @Tag(name = "User Controller",description = "Collection API Endpoints dealing with the user data")
 public class UserController {
 
