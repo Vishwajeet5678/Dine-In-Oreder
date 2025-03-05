@@ -41,7 +41,7 @@ public class Restaurant {
     private LocalTime closesAt;
 
     @Column(name = "diettype")
-    private DietType dietType;
+    private List<DietType> dietType;
 
     @Column(name = "createdat")
     private LocalDateTime createdAt;
@@ -50,8 +50,10 @@ public class Restaurant {
     private LocalDateTime lastModifiedAt;
 
     @ManyToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-    private List<Cuisine> cuisine;
+    private List<Cuisine> cuisines;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Admin admin;
 
 
 }

@@ -22,6 +22,8 @@ public class RegistrationRequest {
     @NotEmpty(message = "Password can not be empty")
     @NotBlank(message = "Password can not be blank")
     private String password;
+    @NotEmpty(message = "phno can not be empty")
+    @NotBlank(message = "phno can not be blank")
     @Pattern(regexp = "^(\\+91[\\s-]?|91[\\s-]?)?[6-9]\\d{9}$",message = "The mobile number should be exactly 10 digits long and must start with a digit between 6 and 9")
     private String phno;
     private UserRole role;
