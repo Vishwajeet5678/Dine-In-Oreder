@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class UserExceptionHandler {
     @ExceptionHandler(UserNotFoundByIdException.class)
-    public ResponseEntity<SimpleErrorResponse> getMessage(UserNotFoundByIdException ex)
+    public ResponseEntity<SimpleErrorResponse> handleUserNotFoundById(UserNotFoundByIdException ex)
     {
-        return ResponseBuilder.error(HttpStatus.NOT_FOUND,ex.getMessage());
+        return ResponseBuilder.notFound("User not Found");
     }
 }

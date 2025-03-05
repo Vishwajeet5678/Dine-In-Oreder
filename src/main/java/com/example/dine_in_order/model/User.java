@@ -2,6 +2,7 @@ package com.example.dine_in_order.model;
 
 import com.example.dine_in_order.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,6 @@ public class User {
 
     @Column(name = "email")
     private String email;
-
     @Column(name = "password")
     private String password;
 

@@ -3,12 +3,9 @@ package com.example.dine_in_order.dto.response;
 import com.example.dine_in_order.enums.UserRole;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
-@Builder
 @Getter
 @Setter
 public class UserResponse {
