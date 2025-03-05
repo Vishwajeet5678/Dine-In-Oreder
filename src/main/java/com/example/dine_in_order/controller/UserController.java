@@ -43,7 +43,7 @@ public class UserController {
     public ResponseEntity<ResponseStructure<UserResponse>> registerUser(@RequestBody @Valid RegistrationRequest user)
     {
         UserResponse response=userService.registerUser(user);
-        return ResponseBuilder.sucess(HttpStatus.CREATED,"User Created",response);
+        return ResponseBuilder.create(response,"User Created");
     }
     @GetMapping("/{userId}")
     @Operation(description = """
@@ -59,7 +59,7 @@ public class UserController {
     public ResponseEntity<ResponseStructure<UserResponse>> findUserById(@PathVariable("userId") long userId)
     {
         UserResponse user=userService.findUserById(userId);
-        return ResponseBuilder.sucess(HttpStatus.OK,"User Found",user);
+        return ResponseBuilder.ok(user,"User Found");
     }
     @PutMapping("/{userId}")
     @Operation(description = """

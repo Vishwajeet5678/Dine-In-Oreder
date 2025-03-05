@@ -10,7 +10,27 @@ import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    void mapToNewUserRequest(UserRequest user,@MappingTarget User user2);
-     void mapToUser(RegistrationRequest user,@MappingTarget User user2);
+    /**
+     * Maps a UserRequest object to an existing User entity.
+     *
+     * @param user The UserRequest containing updated user details.
+     * @param user2 The target User entity to be updated.
+     */
+    void mapToNewUserRequest(UserRequest user, @MappingTarget User user2);
+
+    /**
+     * Maps a RegistrationRequest object to an existing User entity.
+     *
+     * @param user The RegistrationRequest containing user registration details.
+     * @param user2 The target User entity to be updated.
+     */
+    void mapToUser(RegistrationRequest user, @MappingTarget User user2);
+
+    /**
+     * Converts a User entity into a UserResponse DTO.
+     *
+     * @param user The User entity to be converted.
+     * @return A UserResponse DTO containing user details.
+     */
      UserResponse mapToUserResponse(User user) ;
 }

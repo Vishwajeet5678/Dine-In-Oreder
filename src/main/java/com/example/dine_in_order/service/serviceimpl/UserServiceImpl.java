@@ -30,6 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     * Creates a User instance based on the given role.
+     *
+     * @param role The UserRole enum value determining the type of user to be created.
+     * @return A User instance of the corresponding role type.
+     * @throws RuntimeException If the role is invalid.
+     */
 
     private  User createUserByRole(UserRole role) {
         User user;
