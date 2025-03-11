@@ -30,16 +30,6 @@ public class UserController {
 
     private  final UserService userService;
     @PostMapping("/register")
-    @Operation(description = """
-            Collection API Endpoint is used to register user.
-            The endpoint requires the user to select one of the specified role along with the other details.
-            """,
-    responses = {
-            @ApiResponse(responseCode = "201",description = "User Created"),
-            @ApiResponse(responseCode = "400",description = "Invalid input",content = {
-                    @Content(schema = @Schema(implementation = FieldErrorResponse.class))
-            })
-    })
     public ResponseEntity<ResponseStructure<UserResponse>> registerUser(@RequestBody @Valid RegistrationRequest user)
     {
         UserResponse response=userService.registerUser(user);
@@ -77,6 +67,7 @@ public class UserController {
          UserResponse response=userService.updateUserById(userId,user);
         return ResponseBuilder.sucess(HttpStatus.OK,"User Updated",response);
     }
+
 
 
 }

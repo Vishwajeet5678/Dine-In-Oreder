@@ -4,7 +4,9 @@ import com.example.dine_in_order.enums.DietType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.repository.cdi.Eager;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -14,6 +16,7 @@ import java.util.List;
 @Table(name = "restaurant")
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 
 public class Restaurant {
 
@@ -41,19 +44,23 @@ public class Restaurant {
     private LocalTime closesAt;
 
     @Column(name = "diettype")
-    private List<DietType> dietType;
+    private List<DietType> dietTypes;
 
     @Column(name = "createdat")
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @Column(name = "lastmodifiedat")
+    @LastModifiedDate
     private LocalDateTime lastModifiedAt;
 
-    @ManyToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Cuisine> cuisines;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;
 
 
+    @OneToMany(mappedBy = "restaurant")
+    private List<FoodItems>foodItems;
 }

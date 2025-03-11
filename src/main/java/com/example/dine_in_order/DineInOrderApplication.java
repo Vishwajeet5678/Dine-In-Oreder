@@ -2,8 +2,10 @@ package com.example.dine_in_order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class DineInOrderApplication {
 
 	public static void main(String[] args) {
