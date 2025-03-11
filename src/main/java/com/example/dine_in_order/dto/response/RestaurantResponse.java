@@ -23,7 +23,7 @@ public class RestaurantResponse {
     private LocalTime closesAt;
 
 
-    private List<DietType> dietType;
+    private List<DietType> dietTypes;
 
 
     private LocalDateTime createdAt;
